@@ -82,14 +82,9 @@ public class VentPrincipal extends JFrame {
 		});
 		mnNewMenu.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Login");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Login l = new Login();
-				nuevoPanel(l);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_4);
+		
+		
+		
 		
 		JMenu mnNewMenu_1 = new JMenu("|");
 		menuBar.add(mnNewMenu_1);

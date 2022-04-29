@@ -6,7 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.ConexionMYSQL;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
@@ -15,13 +19,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUser;
-	private JPasswordField txtPass;
+	private JTextField txtPass;
 
 	/**
 	 * Launch the application.
@@ -43,7 +50,6 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setOpacity(0.0f);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 621, 494);
 		contentPane = new JPanel();
@@ -70,14 +76,29 @@ public class Login extends JFrame {
 		lblNewLabel.setBounds(87, 32, 105, 62);
 		contentPane.add(lblNewLabel);
 		
-		txtPass = new JPasswordField();
-		txtPass.setBounds(87, 306, 214, 39);
-		contentPane.add(txtPass);
-		
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					ConexionMYSQL con = new ConexionMYSQL();
+					String u = txtUser.getText();
+					String p = txtPass.getText();
+					con.ConectarBasedeDatos();
+					String sql = "select count(password) from login where password='"+p+"'";
+					con.resultado=con.sentencia.executeQuery(sql);
+					while(con.resultado.next()) {
+						if(con.resultado.getString(u).equals(1)) {
+							setVisible(false);
+							VentPrincipal ven = new VentPrincipal();
+							ven.setVisible(true);
+						}else {
+							JOptionPane.showMessageDialog(null, "Usuario desconocido");
+						}
+					}
+					con.DesconectarBasedeDatos();
+				}catch(SQLException ex) {
+					ex.printStackTrace();
+				}
 				
 				
 			}
@@ -85,20 +106,34 @@ public class Login extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBounds(87, 396, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		txtPass = new JTextField();
+		txtPass.setBounds(87, 319, 209, 39);
+		contentPane.add(txtPass);
+		txtPass.setColumns(10);
 	}
 	
 	public void validarUsuario() {
 		int resultado =0;
 		
-		String pass= String.valueOf(txtPass.getPassword());
 		String user = txtUser.getText();
+		String pass= String.valueOf(txtPass.getText());
+		final String url_bd = "jdbc:mysql://localhost/madridautos";
 		
-		String sql= "select * from login where nombre='"+user+"' and password='"+pass+"' ";
+		String sql= "select * from login where nombre='"+user+"' and password="+pass;
+		
 		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/jugadores/login", user, pass);
+			Connection conexion = DriverManager.getConnection(url_bd, user, pass);
+			Statement consulta = conexion.createStatement();
+			ResultSet registro = consulta.executeQuery(sql);
 			
-		}catch(Exception ex) {
 			
+			
+			
+			
+			conexion.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 		
 	}

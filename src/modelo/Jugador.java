@@ -1,61 +1,66 @@
 package modelo;
 
 public class Jugador {
-	//Atributos
-	private int id;
-	private String nombre;
+	// Atributos
+	private int id_Jugador;
+	private String nombreJugador;
 	private int edad;
 	private Posicion posicion;
-	public enum Posicion{
-		PORTERO, DEFENSA, MEDIOCENTRO, DELANTERO, BANQUILLO, NOCONVOCADO;
+
+	public enum Posicion {
+		PORTERO, DEFENSA, MEDIOCENTRO, DELANTERO;
 	}
+
 	private Sexo sexo;
-	public enum Sexo{
-		HOMBRE, MUJER, TS;
+
+	public enum Sexo {
+		HOMBRE, MUJER;
 	}
+
 	private float altura;
 	private float peso;
 	private Piernabuena piernabuena;
-	public enum Piernabuena{
+
+	public enum Piernabuena {
 		DERECHA, IZQUIERDA, AMBIDIESTRO;
 	}
-	private int numero;
-	
 
-	//Metodo constructor por defecto
+	// Metodo constructor por defecto
 	public Jugador() {
-		nombre = null;
+		id_Jugador = 0;
+		nombreJugador = null;
 		edad = -99;
 		posicion = null;
 		sexo = null;
 		altura = -99.9f;
 		peso = -99.9f;
 		piernabuena = null;
-		numero = -99;
+
 	}
-	
-	//Metodo constructor por parámetros
-	public Jugador(int id, String nombre, int edad, Posicion posicion, Sexo sexo, float altura, float peso,
-			Piernabuena piernabuena, int numero) {
-		this.id = id;
-		this.nombre = nombre;
+
+	// Metodo constructor por parámetros
+	public Jugador(int id_Jugador, String nombreJugador, int edad, Posicion posicion, Sexo sexo, float altura,
+			float peso, Piernabuena piernabuena) {
+		this.id_Jugador = id_Jugador;
+		this.nombreJugador = nombreJugador;
 		this.edad = edad;
 		this.posicion = posicion;
 		this.sexo = sexo;
 		this.altura = altura;
 		this.peso = peso;
 		this.piernabuena = piernabuena;
-		this.numero = numero;
+
 	}
 
-	
-	
-	//Accedentes
-	public String getNombre() {
-		return nombre;
+	// Accedentes
+
+	public int getId_Jugador() {
+		return id_Jugador;
 	}
 
-	
+	public String getNombreJugador() {
+		return nombreJugador;
+	}
 
 	public int getEdad() {
 		return edad;
@@ -81,15 +86,14 @@ public class Jugador {
 		return piernabuena;
 	}
 
-	public int getNumero() {
-		return numero;
+	// Mutadores
+
+	public void setId_Jugador(int id_Jugador) {
+		this.id_Jugador = id_Jugador;
 	}
 
-	
-	
-	//Mutadores
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreJugador(String nombreJugador) {
+		this.nombreJugador = nombreJugador;
 	}
 
 	public void setEdad(int edad) {
@@ -115,11 +119,5 @@ public class Jugador {
 	public void setPiernabuena(Piernabuena piernabuena) {
 		this.piernabuena = piernabuena;
 	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-
 
 }

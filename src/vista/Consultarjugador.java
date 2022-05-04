@@ -1,80 +1,213 @@
 package vista;
 
 import javax.swing.JPanel;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+
+import javax.swing.SwingConstants;
+
+import controlador.BasedeDatos;
+import modelo.Jugador;
+
+
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.awt.event.ActionEvent;
+
+
+
 
 public class Consultarjugador extends JPanel {
-	private JTable table;
-	private JTextField txtNombre;
-	private JTextField txtEdad;
-	private JTextField txtPosicion;
-	private JTextField tstSexo;
-	private JTextField txtAltura;
-	private JTextField txtPeso;
-	private JTextField txtPierna;
-	private JTextField txtNumero;
+	private JTable tableConsultas;
+	private JComboBox cmbNombreJugador;
+	private JComboBox cmbNombreEquipo;
+	private JComboBox cmbPierna;
+	private JSpinner spinnerEdad;
+	private JComboBox cmbSexo;
+	private JComboBox cmbPosicion;
 
 	/**
 	 * Create the panel.
 	 */
 	public Consultarjugador() {
+		setBounds(100, 100, 800, 700);
 		setLayout(null);
+		//Crear grupo de radioButtons
+		ButtonGroup grupo1 = new ButtonGroup();
+		//Creamos objeto de tipo BaseDeDatos
+		BasedeDatos b = new BasedeDatos();
 		
-		JLabel lblNewLabel = new JLabel("Consultarjugador");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setBounds(187, 11, 195, 25);
-		add(lblNewLabel);
+		JLabel lblTitulo = new JLabel("CONSULTAR JUGADOR");
+		lblTitulo.setFont(new Font("Arial Black", Font.BOLD, 30));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setBounds(111, 11, 588, 38);
+		add(lblTitulo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(41, 91, 537, 219);
+		scrollPane.setBounds(113, 467, 570, 203);
 		add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		tableConsultas = new JTable();
+		scrollPane.setViewportView(tableConsultas);
+		// Vector para la cabezera de la tabla
+			Vector vNombres = new Vector();
+			vNombres.add("NOMBRE_JUGADOR");
+			vNombres.add("NOMBRE_EQUIPO");
+			vNombres.add("POSICION");
+			vNombres.add("EDAD");
+			vNombres.add("SEXO");
+			vNombres.add("PIERNA");
 		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(67, 377, 86, 20);
-		add(txtNombre);
-		txtNombre.setColumns(10);
+		JRadioButton rdbtnNombreJugador = new JRadioButton("NOMBRE JUGADOR");
+		rdbtnNombreJugador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(true);
+				cmbNombreEquipo.setEnabled(false);
+				cmbPierna.setEnabled(false);
+				spinnerEdad.setEnabled(false);
+				cmbSexo.setEnabled(false);
+				cmbPosicion.setEnabled(false);
+			}
+		});
+		rdbtnNombreJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnNombreJugador.setBounds(36, 78, 137, 23);
+		add(rdbtnNombreJugador);
+		grupo1.add(rdbtnNombreJugador);
 		
-		txtEdad = new JTextField();
-		txtEdad.setBounds(67, 420, 86, 20);
-		add(txtEdad);
-		txtEdad.setColumns(10);
+		JRadioButton rdbtnNombreEquipo = new JRadioButton("NOMBRE EQUIPO");
+		rdbtnNombreEquipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(false);
+				cmbNombreEquipo.setEnabled(true);
+				cmbPierna.setEnabled(false);
+				spinnerEdad.setEnabled(false);
+				cmbSexo.setEnabled(false);
+				cmbPosicion.setEnabled(false);
+			}
+		});
+		rdbtnNombreEquipo.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnNombreEquipo.setBounds(365, 78, 124, 23);
+		add(rdbtnNombreEquipo);
+		grupo1.add(rdbtnNombreEquipo);
 		
-		txtPosicion = new JTextField();
-		txtPosicion.setBounds(67, 474, 86, 20);
-		add(txtPosicion);
-		txtPosicion.setColumns(10);
+		JRadioButton rdbtnEdad = new JRadioButton("EDAD");
+		rdbtnEdad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(false);
+				cmbNombreEquipo.setEnabled(false);
+				cmbPierna.setEnabled(false);
+				spinnerEdad.setEnabled(true);
+				cmbSexo.setEnabled(false);
+				cmbPosicion.setEnabled(false);
+			}
+		});
+		rdbtnEdad.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnEdad.setBounds(658, 78, 109, 23);
+		add(rdbtnEdad);
+		grupo1.add(rdbtnEdad);
 		
-		tstSexo = new JTextField();
-		tstSexo.setBounds(190, 377, 86, 20);
-		add(tstSexo);
-		tstSexo.setColumns(10);
+		JRadioButton rdbtnPosicion = new JRadioButton("POSICION");
+		rdbtnPosicion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(false);
+				cmbNombreEquipo.setEnabled(false);
+				cmbPierna.setEnabled(false);
+				spinnerEdad.setEnabled(false);
+				cmbSexo.setEnabled(false);
+				cmbPosicion.setEnabled(true);
+			}
+		});
+		rdbtnPosicion.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnPosicion.setBounds(36, 274, 109, 23);
+		add(rdbtnPosicion);
+		grupo1.add(rdbtnPosicion);
 		
-		txtAltura = new JTextField();
-		txtAltura.setBounds(190, 431, 86, 20);
-		add(txtAltura);
-		txtAltura.setColumns(10);
+		JRadioButton rdbtnSexo = new JRadioButton("SEXO");
+		rdbtnSexo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(false);
+				cmbNombreEquipo.setEnabled(false);
+				cmbPierna.setEnabled(false);
+				spinnerEdad.setEnabled(false);
+				cmbSexo.setEnabled(true);
+				cmbPosicion.setEnabled(false);
+			}
+		});
+		rdbtnSexo.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnSexo.setBounds(380, 274, 109, 23);
+		add(rdbtnSexo);
+		grupo1.add(rdbtnSexo);
 		
-		txtPeso = new JTextField();
-		txtPeso.setBounds(190, 474, 86, 20);
-		add(txtPeso);
-		txtPeso.setColumns(10);
+		JRadioButton rdbtnPierna = new JRadioButton("PIERNA");
+		rdbtnPierna.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmbNombreJugador.setEnabled(false);
+				cmbNombreEquipo.setEnabled(false);
+				cmbPierna.setEnabled(true);
+				spinnerEdad.setEnabled(false);
+				cmbSexo.setEnabled(false);
+				cmbPosicion.setEnabled(false);
+			}
+		});
+		rdbtnPierna.setHorizontalAlignment(SwingConstants.CENTER);
+		rdbtnPierna.setBounds(658, 274, 109, 23);
+		add(rdbtnPierna);
+		grupo1.add(rdbtnPierna);
 		
-		txtPierna = new JTextField();
-		txtPierna.setBounds(312, 377, 86, 20);
-		add(txtPierna);
-		txtPierna.setColumns(10);
+		cmbNombreJugador = new JComboBox();
+		cmbNombreJugador.setBounds(36, 108, 137, 22);
+		add(cmbNombreJugador);
+		ArrayList<Jugador> arrayLNombreJugador = b.cargarComboNombreJugador();
+		for (int i = 0; i < arrayLNombreJugador.size(); i++) {
+			cmbNombreJugador.addItem(arrayLNombreJugador.get(i).getNombreJugador());
+		}
 		
-		txtNumero = new JTextField();
-		txtNumero.setBounds(312, 431, 86, 20);
-		add(txtNumero);
-		txtNumero.setColumns(10);
+		cmbNombreEquipo = new JComboBox();
+		cmbNombreEquipo.setBounds(365, 108, 124, 22);
+		add(cmbNombreEquipo);
+		
+		cmbPierna = new JComboBox();
+		cmbPierna.setBounds(658, 304, 109, 22);
+		add(cmbPierna);
+		
+		spinnerEdad = new JSpinner();
+		spinnerEdad.setBounds(658, 109, 109, 20);
+		add(spinnerEdad);
+		
+		cmbSexo = new JComboBox();
+		cmbSexo.setBounds(380, 304, 109, 22);
+		add(cmbSexo);
+		
+		cmbPosicion = new JComboBox();
+		cmbPosicion.setBounds(36, 304, 137, 22);
+		add(cmbPosicion);
+		
+		
+		cmbNombreJugador.setEnabled(false);
+		cmbNombreEquipo.setEnabled(false);
+		cmbPierna.setEnabled(false);
+		spinnerEdad.setEnabled(false);
+		cmbSexo.setEnabled(false);
+		cmbPosicion.setEnabled(false);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 }

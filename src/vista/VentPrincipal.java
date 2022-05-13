@@ -26,8 +26,9 @@ public class VentPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentPrincipal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 645, 593);
+		setBounds(100, 100, 1100, 900);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

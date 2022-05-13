@@ -2,122 +2,106 @@ package modelo;
 
 public class Jugador {
 	// Atributos
-	private int id_Jugador;
+	private int id;
+	private int id_Equipo;
 	private String nombreJugador;
 	private int edad;
-	private Posicion posicion;
-
-	public enum Posicion {
-		PORTERO, DEFENSA, MEDIOCENTRO, DELANTERO;
-	}
-
-	private Sexo sexo;
-
-	public enum Sexo {
-		HOMBRE, MUJER;
-	}
-
+	private String posicion;
+	private String sexo;
 	private float altura;
-	private float peso;
-	private Piernabuena piernabuena;
-
-	public enum Piernabuena {
-		DERECHA, IZQUIERDA, AMBIDIESTRO;
-	}
-
-	// Metodo constructor por defecto
+	private String piernabuena;
+	
 	public Jugador() {
-		id_Jugador = 0;
+		id = 0;
+		id_Equipo =0;
 		nombreJugador = null;
-		edad = -99;
+		edad = 0;
 		posicion = null;
 		sexo = null;
-		altura = -99.9f;
-		peso = -99.9f;
+		altura = 0.0f;
 		piernabuena = null;
-
+		
 	}
-
-	// Metodo constructor por parámetros
-	public Jugador(int id_Jugador, String nombreJugador, int edad, Posicion posicion, Sexo sexo, float altura,
-			float peso, Piernabuena piernabuena) {
-		this.id_Jugador = id_Jugador;
+	
+	public Jugador(int id, int id_Equipo, String nombreJugador, int edad, String posicion, String sexo, float altura,
+			String piernabuena) {
+		this.id = id;
+		this.id_Equipo = id_Equipo;
 		this.nombreJugador = nombreJugador;
 		this.edad = edad;
 		this.posicion = posicion;
 		this.sexo = sexo;
 		this.altura = altura;
-		this.peso = peso;
 		this.piernabuena = piernabuena;
-
 	}
 
-	// Accedentes
+	public int getId() {
+		return id;
+	}
 
-	public int getId_Jugador() {
-		return id_Jugador;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId_Equipo() {
+		return id_Equipo;
+	}
+
+	public void setId_Equipo(int id_Equipo) {
+		this.id_Equipo = id_Equipo;
 	}
 
 	public String getNombreJugador() {
 		return nombreJugador;
 	}
 
-	public int getEdad() {
-		return edad;
-	}
-
-	public Posicion getPosicion() {
-		return posicion;
-	}
-
-	public Sexo getSexo() {
-		return sexo;
-	}
-
-	public float getAltura() {
-		return altura;
-	}
-
-	public float getPeso() {
-		return peso;
-	}
-
-	public Piernabuena getPiernabuena() {
-		return piernabuena;
-	}
-
-	// Mutadores
-
-	public void setId_Jugador(int id_Jugador) {
-		this.id_Jugador = id_Jugador;
-	}
-
 	public void setNombreJugador(String nombreJugador) {
 		this.nombreJugador = nombreJugador;
+	}
+
+	public int getEdad() {
+		return edad;
 	}
 
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 
-	public void setPosicion(Posicion posicion) {
+	public String getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(String posicion) {
 		this.posicion = posicion;
 	}
 
-	public void setSexo(Sexo sexo) {
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+
+	public float getAltura() {
+		return altura;
 	}
 
 	public void setAltura(float altura) {
 		this.altura = altura;
 	}
 
-	public void setPeso(float peso) {
-		this.peso = peso;
+	public String getPiernabuena() {
+		return piernabuena;
 	}
 
-	public void setPiernabuena(Piernabuena piernabuena) {
+	public void setPiernabuena(String piernabuena) {
 		this.piernabuena = piernabuena;
 	}
+	
+	
+
+	
+	
 
 }

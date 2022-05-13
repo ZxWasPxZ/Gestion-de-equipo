@@ -2,19 +2,19 @@ package modelo;
 
 public class Equipo {
 	// Atributos
-	private int id_Equipo;
+	private int id;
 	private String nombreEquipo;
 
 	// Metodo constructor por defecto
 	public Equipo() {
-		id_Equipo = 0;
+		id = 0;
 		nombreEquipo = null;
 
 	}
 
 	// Metodo constructor por parámetros
-	public Equipo(int id_Equipo, String nombreEquipo) {
-		this.id_Equipo = id_Equipo;
+	public Equipo(int id, String nombreEquipo) {
+		this.id = id;
 		this.nombreEquipo = nombreEquipo;
 	}
 
@@ -23,8 +23,8 @@ public class Equipo {
 		return nombreEquipo;
 	}
 
-	public int getId_Equipo() {
-		return id_Equipo;
+	public int getId() {
+		return id;
 	}
 
 	// Mutadores
@@ -33,8 +33,8 @@ public class Equipo {
 		this.nombreEquipo = nombreEquipo;
 	}
 
-	public void setId_Equipo(int id_Equipo) {
-		this.id_Equipo = id_Equipo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

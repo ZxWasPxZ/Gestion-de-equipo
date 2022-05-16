@@ -172,7 +172,104 @@ public class BasedeDatos {
 					return arrayLJugador;
 				}
 	
-	
+				//Metodo para filtrar por sexo
+				public ArrayList<Jugador> cargandoSexo(String filtro) {
+					ArrayList<Jugador> arrayLJugador = new ArrayList<>();
+					Jugador nuevoJugador;
 
+					try {
+						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/jugadores", "jugadores",
+								"jugadores");
+						Statement consulta = conexion.createStatement();
+						ResultSet registro = consulta.executeQuery("select * from jugador where sexo = '" + filtro
+								+  "';");
+						
+
+						while (registro.next()) {
+							nuevoJugador = new Jugador();
+							nuevoJugador.setId(Integer.parseInt(registro.getString("id")));
+							nuevoJugador.setId_Equipo(Integer.parseInt(registro.getString("id_Equipo")));
+							nuevoJugador.setNombreJugador(registro.getString("nombreJugador"));
+							nuevoJugador.setEdad(Integer.parseInt(registro.getString("edad")));
+							nuevoJugador.setPosicion(registro.getString("posicion"));
+							nuevoJugador.setSexo(registro.getString("sexo"));
+							nuevoJugador.setAltura(Float.parseFloat(registro.getString("altura")));
+							nuevoJugador.setPiernabuena(registro.getString("piernabuena"));
+							arrayLJugador.add(nuevoJugador);
+
+							
+						}
+						conexion.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return arrayLJugador;
+				}
+
+				//Metodo para filtrar por altura
+				public ArrayList<Jugador> cargandoAltura(double filtro) {
+					ArrayList<Jugador> arrayLJugador = new ArrayList<>();
+					Jugador nuevoJugador;
+					try {
+						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/jugadores", "jugadores",
+								"jugadores");
+						Statement consulta = conexion.createStatement();
+						ResultSet registro = consulta.executeQuery("select * from jugador where altura <= " + filtro
+								+  ";");
+
+						while (registro.next()) {
+							nuevoJugador = new Jugador();
+							nuevoJugador.setId(Integer.parseInt(registro.getString("id")));
+							nuevoJugador.setId_Equipo(Integer.parseInt(registro.getString("id_Equipo")));
+							nuevoJugador.setNombreJugador(registro.getString("nombreJugador"));
+							nuevoJugador.setEdad(Integer.parseInt(registro.getString("edad")));
+							nuevoJugador.setPosicion(registro.getString("posicion"));
+							nuevoJugador.setSexo(registro.getString("sexo"));
+							nuevoJugador.setAltura(Float.parseFloat(registro.getString("altura")));
+							nuevoJugador.setPiernabuena(registro.getString("piernabuena"));
+							arrayLJugador.add(nuevoJugador);
+
+							
+						}
+						conexion.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return arrayLJugador;
+
+				}
 	
+				//Metodo para filtrar por pierna
+				public ArrayList<Jugador> cargandoPierna(String filtro) {
+					ArrayList<Jugador> arrayLJugador = new ArrayList<>();
+					Jugador nuevoJugador;
+
+					try {
+						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/jugadores", "jugadores",
+								"jugadores");
+						Statement consulta = conexion.createStatement();
+						ResultSet registro = consulta.executeQuery("select * from jugador where piernabuena = '" + filtro
+								+  "';");
+						
+
+						while (registro.next()) {
+							nuevoJugador = new Jugador();
+							nuevoJugador.setId(Integer.parseInt(registro.getString("id")));
+							nuevoJugador.setId_Equipo(Integer.parseInt(registro.getString("id_Equipo")));
+							nuevoJugador.setNombreJugador(registro.getString("nombreJugador"));
+							nuevoJugador.setEdad(Integer.parseInt(registro.getString("edad")));
+							nuevoJugador.setPosicion(registro.getString("posicion"));
+							nuevoJugador.setSexo(registro.getString("sexo"));
+							nuevoJugador.setAltura(Float.parseFloat(registro.getString("altura")));
+							nuevoJugador.setPiernabuena(registro.getString("piernabuena"));
+							arrayLJugador.add(nuevoJugador);
+
+							
+						}
+						conexion.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return arrayLJugador;
+				}
 }

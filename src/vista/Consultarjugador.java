@@ -316,8 +316,97 @@ public class Consultarjugador extends JPanel {
 						
 					}
 				});
+				//metodo para filtrar por sexo
+				cmbSexo.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+						String filtro;
+						filtro = cmbSexo.getSelectedItem().toString();
+						if (rdbtnSexo.isSelected()) {
+							arrayLJugador= b.cargandoSexo(filtro);
+							table.setModel(new DefaultTableModel(vNombres, arrayLJugador.size()));
+						}
+						for (int i = 0; i < arrayLJugador.size(); i++) {
+							table.setValueAt(arrayLJugador.get(i).getId(), i, 0);
+							table.setValueAt(arrayLJugador.get(i).getId_Equipo(), i, 1);
+							for (Equipo ex : arrayLEquipo) {
+
+								if (ex.getId() == arrayLJugador.get(i).getId_Equipo()) {
+									table.setValueAt(ex.getNombreEquipo(), i, 2);
+
+								}
+							}
+							
+							table.setValueAt(arrayLJugador.get(i).getNombreJugador(), i, 3);
+							table.setValueAt(arrayLJugador.get(i).getEdad(), i, 4);
+							table.setValueAt(arrayLJugador.get(i).getPosicion(), i, 5);
+							table.setValueAt(arrayLJugador.get(i).getSexo(), i, 6);
+							table.setValueAt(arrayLJugador.get(i).getAltura(), i, 7);
+							table.setValueAt(arrayLJugador.get(i).getPiernabuena(), i, 8);
+						}
+						
+					}
+				});
 		
-		
+				//metodo para filtrar por altura
+				spinnerAltura.addChangeListener(new ChangeListener() {
+					public void stateChanged(ChangeEvent e) {
+						double filtro;
+						filtro = (double) spinnerAltura.getValue();
+						if (rdbtnAltura.isSelected()) {
+							arrayLJugador = b.cargandoAltura(filtro);
+							table.setModel(new DefaultTableModel(vNombres, arrayLJugador.size()));
+						}
+						for (int i = 0; i < arrayLJugador.size(); i++) {
+							table.setValueAt(arrayLJugador.get(i).getId(), i, 0);
+							table.setValueAt(arrayLJugador.get(i).getId_Equipo(), i, 1);
+							for (Equipo ex : arrayLEquipo) {
+
+								if (ex.getId() == arrayLJugador.get(i).getId_Equipo()) {
+									table.setValueAt(ex.getNombreEquipo(), i, 2);
+
+								}
+							}
+							table.setValueAt(arrayLJugador.get(i).getNombreJugador(), i, 3);
+							table.setValueAt(arrayLJugador.get(i).getEdad(), i, 4);
+							table.setValueAt(arrayLJugador.get(i).getPosicion(), i, 5);
+							table.setValueAt(arrayLJugador.get(i).getSexo(), i, 6);
+							table.setValueAt(arrayLJugador.get(i).getAltura(), i, 7);
+							table.setValueAt(arrayLJugador.get(i).getPiernabuena(), i, 8);
+							
+						}
+					}
+				});
+				
+				//metodo para filtrar por pierna
+				cmbPierna.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+						String filtro;
+						filtro = cmbPierna.getSelectedItem().toString();
+						if (rdbtnPierna.isSelected()) {
+							arrayLJugador= b.cargandoPierna(filtro);
+							table.setModel(new DefaultTableModel(vNombres, arrayLJugador.size()));
+						}
+						for (int i = 0; i < arrayLJugador.size(); i++) {
+							table.setValueAt(arrayLJugador.get(i).getId(), i, 0);
+							table.setValueAt(arrayLJugador.get(i).getId_Equipo(), i, 1);
+							for (Equipo ex : arrayLEquipo) {
+
+								if (ex.getId() == arrayLJugador.get(i).getId_Equipo()) {
+									table.setValueAt(ex.getNombreEquipo(), i, 2);
+
+								}
+							}
+							
+							table.setValueAt(arrayLJugador.get(i).getNombreJugador(), i, 3);
+							table.setValueAt(arrayLJugador.get(i).getEdad(), i, 4);
+							table.setValueAt(arrayLJugador.get(i).getPosicion(), i, 5);
+							table.setValueAt(arrayLJugador.get(i).getSexo(), i, 6);
+							table.setValueAt(arrayLJugador.get(i).getAltura(), i, 7);
+							table.setValueAt(arrayLJugador.get(i).getPiernabuena(), i, 8);
+						}
+						
+					}
+				});
 		// Para que no salga nada al principio nada activado de los radioButton
 				cmbEquipo.setEnabled(false);
 				spinnerEdad.setEnabled(false);
